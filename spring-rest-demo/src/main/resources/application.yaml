@@ -3,6 +3,10 @@ spring:
     url: jdbc:mysql://localhost:3306/testdb
     username: root
     password: m.r.a.d.2001
+#  security:
+#    user:
+#      name: murad
+#      password: 1234
 
   jpa:
     hibernate:

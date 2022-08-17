@@ -17,12 +17,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping
+
+
+
+    @GetMapping("/admin")
     public EmployeeResponse getAllEmployee(){
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") long id){
        return employeeService.getEmployee(id);
     }
