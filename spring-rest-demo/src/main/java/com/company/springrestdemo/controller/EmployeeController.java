@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/employees")
@@ -17,28 +19,25 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-
-
-
-    @GetMapping("/admin")
+    @GetMapping
     public EmployeeResponse getAllEmployee(){
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") long id){
        return employeeService.getEmployee(id);
     }
 
     @GetMapping("/search")
-    public EmployeeResponse getEmployeeNameAndsurname(@RequestParam("name") String name,
+    public EmployeeResponse getEmployeeNameAndSurname(@RequestParam("name") String name,
                                                       @RequestParam("surname") String surname){
        return employeeService.getEmployeeByNameAndSurname(name,surname);
     }
 
-    @PostMapping
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void insert(@RequestBody EmployeeDto employeeDto){
+    public void insert(@RequestBody @Valid EmployeeDto employeeDto){
         employeeService.insert(employeeDto);
     }
 

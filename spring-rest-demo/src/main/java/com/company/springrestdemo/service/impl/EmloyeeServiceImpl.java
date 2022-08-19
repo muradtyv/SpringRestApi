@@ -1,14 +1,12 @@
 package com.company.springrestdemo.service.impl;
 
 import com.company.springrestdemo.enums.ErrorCodeEnum;
-import com.company.springrestdemo.exception.CustomRestException;
+import com.company.springrestdemo.exception.CustomNotFoundException;
 import com.company.springrestdemo.model.Employee;
 import com.company.springrestdemo.repository.EmployeeRepository;
 import com.company.springrestdemo.rest.model.dto.EmployeeDto;
 import com.company.springrestdemo.rest.model.response.EmployeeResponse;
 import com.company.springrestdemo.service.EmployeeService;
-import com.fasterxml.jackson.databind.util.BeanUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +35,7 @@ public class EmloyeeServiceImpl implements EmployeeService {
     public EmployeeDto getEmployee(Long id) {
         return employeeRepository.findById(id)
                 .map(employee -> convertDto(employee))
-                .orElseThrow(() -> new CustomRestException(ErrorCodeEnum.CAN_NOT_FIND_EMPLOYEE));
+                .orElseThrow(() -> new CustomNotFoundException(ErrorCodeEnum.CAN_NOT_FIND_EMPLOYEE));
     }
 
     @Override
@@ -102,7 +100,7 @@ public class EmloyeeServiceImpl implements EmployeeService {
 
     private Employee getEmployeeId(long id){
         return employeeRepository.findById(id)
-                .orElseThrow(()-> new CustomRestException(ErrorCodeEnum.CAN_NOT_FIND_EMPLOYEE));
+                .orElseThrow(()-> new CustomNotFoundException(ErrorCodeEnum.CAN_NOT_FIND_EMPLOYEE));
     }
 
     private EmployeeDto convertDto(Employee employee){
